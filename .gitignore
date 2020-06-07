@@ -103,8 +103,15 @@ dist
 # TernJS port file
 .tern-port
 
+# macOS stuff
 .DS_Store
 
+# build dir
 server/build/*
 
+# vscode metadata
 .vscode
+
+# env vars
+*.env
+.env.*

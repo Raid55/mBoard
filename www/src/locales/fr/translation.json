@@ -1,0 +1,23 @@
+{
+  "homePage": {
+    "discover": "Film a Découvrir",
+    "genere": {
+      "action": "Action",
+      "thriller": "Thriller"
+    }
+  },
+  "MovieSideSheet": {
+    "info": {
+      "tabName": "Info"
+    },
+    "credits": {
+      "tabName": "Cast and Crew"
+    },
+    "reviews": {
+      "tabName": "Reviews"
+    },
+    "recs": {
+      "tabName": "More Like This"
+    }
+  }
+}
