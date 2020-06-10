@@ -3,7 +3,9 @@ import * as bodyParser from 'body-parser';
 import * as proxy from 'express-http-proxy';
 import * as path from 'path';
 
-import fancyLog from './middleware/fancyLog';
+import {MOVIEDB} from './config';
+
+import {fancyLog} from './middleware';
 import API from './API';
 
 const app = express();
@@ -20,7 +22,14 @@ app.use(express.static(path.resolve(__dirname, 'dist')));
 
 // register api routes
 app.use('/api', API);
-// register proxys
+// register image proxy
+app.use(
+  '/poster',
+  proxy(MOVIEDB.CDN_HOST, {
+    proxyReqPathResolver: req =>
+      MOVIEDB.BASE_PATH + MOVIEDB.POSTER_SIZE + req.url,
+  })
+);
 
 // serve react app
 app.get('*', (req, res) => {

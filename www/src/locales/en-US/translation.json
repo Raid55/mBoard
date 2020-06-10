@@ -19,5 +19,8 @@
     "recommendations": {
       "tabName": "More Like This"
     }
+  },
+  "SearchSheet": {
+    "searchBox": "Search for movie..."
   }
 }
