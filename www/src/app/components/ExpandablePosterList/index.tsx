@@ -6,16 +6,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import {
-  Pane,
-  Card,
-  Heading,
-  Pill,
-  ChevronRightIcon,
-  // TagInput,
-} from 'evergreen-ui';
+import { Pane, Heading, ChevronRightIcon } from 'evergreen-ui';
 
-import { PosterCard } from '../PosterCard';
+import { PosterList } from '../PosterList';
 import { Poster } from '../PosterCard/types';
 
 interface Props {
@@ -38,23 +31,11 @@ export function ExpandablePosterList(props: Props) {
         </ListTab>
         {headerChild}
       </ListHeader>
-      <PosterList background="tint1">
-        {posters.map((poster, index) => (
-          <PosterCard key={poster.id} poster={poster} />
-        ))}
-        <EndListPill />
-      </PosterList>
+      <PosterList posters={posters} />
     </ListContainer>
   );
 }
 
-const EndListPill = () => {
-  return (
-    <Card margin="auto" height="auto" width="auto" flexShrink={0}>
-      <Pill margin={8}>End of Lists</Pill>
-    </Card>
-  );
-};
 const ListContainer = styled(Pane)`
   display: flex;
   flex-direction: column;
@@ -82,12 +63,4 @@ const TabText = styled(Heading)`
   white-space: nowrap;
   text-align: center;
   margin: auto 0;
-`;
-
-const PosterList = styled(Pane)`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  overflow: auto;
-  padding: 1rem;
 `;

@@ -1,5 +1,6 @@
 import { MovieSideSheetState } from 'app/containers/MovieSideSheet/types';
 import { HomePageState } from 'app/containers/HomePage/types';
+import { SearchSheetState } from 'app/containers/SearchSheet/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -9,5 +10,6 @@ import { HomePageState } from 'app/containers/HomePage/types';
 export interface RootState {
   movieSideSheet?: MovieSideSheetState;
   homePage?: HomePageState;
+  searchSheet?: SearchSheetState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

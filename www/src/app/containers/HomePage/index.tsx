@@ -4,20 +4,30 @@
  *
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, Redirect, useRouteMatch } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  Redirect,
+  useRouteMatch,
+  Link,
+  useHistory,
+} from 'react-router-dom';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import styled from 'styled-components/macro';
 
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
 import { selectHomePage } from './selectors';
 import { homePageSaga } from './saga';
 
+import { Paginator } from '../../components/Paginator';
 import { ExpandablePosterList } from '../../components/ExpandablePosterList';
 import { MovieSideSheet } from '../MovieSideSheet/Loadable';
+import { SearchSheet } from '../SearchSheet/Loadable';
+import { SearchBox } from '../SearchSheet/searchBox';
 
 const TEMP_MOVIES = [
   {
@@ -87,6 +97,11 @@ export function HomePage(props: Props) {
 
   const { path } = useRouteMatch();
   const { t, i18n } = useTranslation();
+  const history = useHistory();
+
+  const openSearch = useCallback(() => {
+    history.push('/search');
+  }, [dispatch, history]);
 
   return (
     <>
@@ -94,11 +109,15 @@ export function HomePage(props: Props) {
         <title>home</title>
         <meta name="description" content="mBoard homepage" />
       </Helmet>
+      <SearchBox onAnyAction={openSearch} />
       <ExpandablePosterList
         posters={[]}
         tabName="Sci-Fi Flicks"
         tabColor="#FBE6A2"
       />
+      <div>
+        <Paginator />
+      </div>
       <ExpandablePosterList posters={TEMP_MOVIES} tabName={'Discover'} />
       <ExpandablePosterList
         posters={TEMP_MOVIES}
@@ -106,11 +125,14 @@ export function HomePage(props: Props) {
         tabColor="#FAE2E2"
       />
       <Switch>
+        <Route path="/search" component={SearchSheet} />
         <Route path="/movie/:id" component={MovieSideSheet} />
         <Redirect path={path} to={`/`} />
       </Switch>
     </>
   );
 }
-// headerChild={}
-const Div = styled.div``;
+
+const SearchLink = styled(Link)`
+  text-decoration: none;
+`;

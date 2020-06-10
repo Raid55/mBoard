@@ -22,19 +22,18 @@ import { Header as SheetHeader } from './Header';
 import { TabBar as SheetTabBar } from './TabBar';
 
 interface Props {
-  closed: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
 
 export function ContentSideSheet(props: Props) {
-  const { closed, onClose } = props;
+  const { onClose } = props;
 
   // const { t, i18n } = useTranslation();
 
   return (
     <SideSheet
-      isShown={!closed}
+      isShown={true}
       onCloseComplete={onClose}
       containerProps={{
         display: 'flex',

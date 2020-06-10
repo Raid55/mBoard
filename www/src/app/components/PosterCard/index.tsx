@@ -61,7 +61,7 @@ const PosterName = styled(Heading)`
 const PosterContainer = styled(Card)`
   background-color: white;
   margin: 0 1rem;
-  width: 10.5rem;
+  width: 9rem;
   height: 100%;
   flex-shrink: 0;
 `;

@@ -43,7 +43,6 @@ export function MovieSideSheet(props: Props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const closed = useSelector(s.selectClosed);
   const selectedTab = useSelector(s.selectSelectedTab);
   const loading = useSelector(s.selectLoading);
 
@@ -64,7 +63,7 @@ export function MovieSideSheet(props: Props) {
   );
 
   const closeSideSheet = useCallback(() => {
-    dispatch(actions.closeSideSheet());
+    dispatch(actions.resetTab());
     history.push('/');
   }, [dispatch, history]);
 
@@ -100,7 +99,7 @@ export function MovieSideSheet(props: Props) {
           content={`Information about the movie: ${'lol'}`}
         />
       </Helmet>
-      <ContentSideSheet closed={closed} onClose={closeSideSheet}>
+      <ContentSideSheet onClose={closeSideSheet}>
         <MovieSheetHeader
           posterPath="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg"
           ytVideo="P6AaSMfXHbA"
@@ -136,7 +135,7 @@ interface InfoProps {
 }
 const Info = (props: InfoProps) => {
   return (
-    <Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
+    <Pane flex="1" background="tint1" padding={16}>
       <Card
         backgroundColor="white"
         elevation={0}
