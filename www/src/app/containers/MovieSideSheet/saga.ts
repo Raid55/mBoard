@@ -58,3 +58,50 @@ export function* movieSideSheetSaga() {
 //   // It will be cancelled automatically on component unmount
 //   yield takeLatest(actions.loadRepos.type, getRepos);
 // }
+
+// import {
+//   take,
+//   call,
+//   all,
+//   put,
+//   select,
+//   delay,
+//   takeLatest,
+// } from 'redux-saga/effects';
+// import axios, { AxiosResponse, AxiosError } from 'axios';
+// import { actions } from './slice';
+// import { PagedMovieList } from 'commonTypes/movies';
+
+// function* getSearchResults() {
+//   const query: string = yield select(selectSearchInput);
+//   const page: number = yield select(selectSearchPage);
+//   const params = {
+//     query,
+//     page,
+//   };
+
+//   try {
+//     const resp: AxiosResponse = yield call(axios.get, '/api/search', {
+//       params,
+//     });
+//     const data: PagedMovieList = resp.data;
+//     console.log(resp);
+//     if (data.results && data.results.length > 0) {
+//       yield put(actions.searchLoaded(data));
+//     } else {
+//       yield put(actions.error());
+//     }
+//   } catch (err) {
+//     if ((err as AxiosError).response?.status === 404) {
+//       yield put(actions.error());
+//     } else {
+//       yield put(actions.error());
+//     }
+//   }
+// }
+// export function* searchSheetSaga() {
+//   yield all([
+//     takeLatest(actions.searchInputUpdated.type, handleSearchInput),
+//     takeLatest(actions.loadSearch.type, getSearchResults),
+//   ]);
+// }

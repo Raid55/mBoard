@@ -19,3 +19,12 @@ export const selectSearchPage = createSelector(
   [selectDomain],
   searchSheetState => searchSheetState.page,
 );
+export const selectLoading = createSelector(
+  [selectDomain],
+  searchSheetState => searchSheetState.loading,
+);
+
+export const selectSearchPageResults = createSelector(
+  [selectDomain, selectSearchPage],
+  (searchSheetState, searchPage) => searchSheetState.results[searchPage],
+);

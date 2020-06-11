@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 
-import { PagedMovieList } from '../../../../../server/src/types/movies';
+import { PagedMovieList } from 'commonTypes/movies';
 import { ContainerState } from './types';
 
 // The initial state of the SearchSheet container
@@ -20,6 +20,7 @@ const searchSheetSlice = createSlice({
   reducers: {
     searchInputUpdated(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
+      state.loading = true;
     },
     loadSearch(state) {
       state.err = false;

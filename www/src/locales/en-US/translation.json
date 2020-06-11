@@ -22,5 +22,9 @@
   },
   "SearchSheet": {
     "searchBox": "Search for movie..."
+  },
+  "PosterList": {
+    "endList": "End of List",
+    "emptyList": "Tea for two and two for tea..."
   }
 }

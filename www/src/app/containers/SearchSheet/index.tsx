@@ -13,16 +13,21 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import styled from 'styled-components/macro';
 
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
-import { selectSearchInput } from './selectors';
+import {
+  selectSearchInput,
+  selectSearchPage,
+  selectSearchPageResults,
+  selectLoading,
+} from './selectors';
 import { searchSheetSaga } from './saga';
 
 import { SideSheet, Position } from 'evergreen-ui';
 import { SearchBox } from './searchBox';
-
+import { PosterList } from '../../components/PosterList';
 interface Props {}
 
 export function SearchSheet(props: Props) {
@@ -43,6 +48,9 @@ export function SearchSheet(props: Props) {
   });
 
   const searchValue = useSelector(selectSearchInput);
+  const page = useSelector(selectSearchPage);
+  const pageResults = useSelector(selectSearchPageResults);
+  const loading = useSelector(selectLoading);
 
   const closeSearchSheet = useCallback(() => {
     history.push('/');
@@ -64,6 +72,7 @@ export function SearchSheet(props: Props) {
       onCloseComplete={closeSearchSheet}
     >
       <SearchBox ref={anchorTab} value={searchValue} onInput={onSearchInput} />
+      <PosterList posters={pageResults || []} loading={loading} overflow />
     </SideSheet>
   );
 }

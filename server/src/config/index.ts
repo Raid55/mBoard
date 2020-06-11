@@ -10,8 +10,5 @@ export const MOVIEDB = {
   POSTER_SIZE: process.env.POSTER_SIZE || '/w500',
 };
 
-export const MOVIEDB_ACCESS_TOKEN =
-  process.env.MOVIEDB_ACCESS_TOKEN ||
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTU2OWMwZTBkN2QwZDAzNTQ1NzFiODEzODU5OWI5NyIsInN1YiI6IjVlZDZkMTE2MWIxNTdkMDAyMDU0OTJhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qRiVlNjO9HWoRn6Ohoy2DKeQMPqcCwoq_lp7gbX3iTs';
-
+export const MOVIEDB_ACCESS_TOKEN = process.env.MOVIEDB_ACCESS_TOKEN || '';
 export const CACHE_DURATION = 900;

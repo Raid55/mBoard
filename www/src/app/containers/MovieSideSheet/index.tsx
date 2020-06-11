@@ -49,7 +49,7 @@ export function MovieSideSheet(props: Props) {
   useEffect(() => {
     const pathEnd = history.location.pathname.split('/').pop() || '';
     dispatch(actions.updateMovieID(id));
-    dispatch(actions.loadInfo());
+    // dispatch(actions.loadInfo());
     if (selectedTab !== pathEnd && pathEnd in MovieTabs)
       dispatch(actions.updateSelectedTab(pathEnd as MovieTabs));
   }, [dispatch, history]);

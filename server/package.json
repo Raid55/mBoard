@@ -23,6 +23,7 @@
     "@types/express-http-proxy": "^1.6.1",
     "@types/morgan": "^1.9.0",
     "@types/node": "^13.11.1",
+    "commontypes": "file:../commonTypes",
     "gts": "^2.0.2",
     "typescript": "^3.8.3"
   },

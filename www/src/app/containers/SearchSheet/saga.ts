@@ -9,10 +9,7 @@ import {
 } from 'redux-saga/effects';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { actions } from './slice';
-import {
-  MovieDetails,
-  PagedMovieList,
-} from '../../../../../server/src/types/movies';
+import { PagedMovieList } from 'commonTypes/movies';
 import { selectSearchInput, selectSearchPage } from './selectors';
 
 const SEARCH_DEBOUNCE_DELAY = 2420;
@@ -37,6 +34,7 @@ function* getSearchResults() {
       params,
     });
     const data: PagedMovieList = resp.data;
+    console.log(resp);
     if (data.results && data.results.length > 0) {
       yield put(actions.searchLoaded(data));
     } else {

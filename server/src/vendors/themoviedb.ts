@@ -1,8 +1,8 @@
 import axios, {AxiosInstance} from 'axios';
 
 import {MOVIEDB_ACCESS_TOKEN} from '../config';
-import {STATUS_CODES} from '../types/api';
-import {FullMovieDetails, PagedMovieList} from '../types/movies';
+import {StatusCodes} from 'commonTypes/api';
+import {FullMovieDetails, PagedMovieList} from 'commonTypes/movies';
 
 const movieDBInstace: AxiosInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
@@ -26,7 +26,7 @@ export const getFullMovie = (id: string): FullMovieAsync => {
     append_to_response: 'release_dates,credits,videos,similar',
   };
   return movieDBInstace.get(`/movie/${id}`, {params}).then(resp => {
-    if (resp.status !== STATUS_CODES.ok) {
+    if (resp.status !== StatusCodes.ok) {
       throw new Error('TODO');
     }
     return resp.data;
@@ -42,7 +42,7 @@ export const getSimilarMovies = (
     page,
   };
   return movieDBInstace.get(`/movie/${id}/similar`, {params}).then(resp => {
-    if (resp.status !== STATUS_CODES.ok) {
+    if (resp.status !== StatusCodes.ok) {
       throw new Error('TODO');
     }
     return resp.data;
@@ -57,7 +57,7 @@ export const getNowPlayingMovies = (
     page,
   };
   return movieDBInstace.get(`/movie/now_playing`, {params}).then(resp => {
-    if (resp.status !== STATUS_CODES.ok) {
+    if (resp.status !== StatusCodes.ok) {
       throw new Error('TODO');
     }
     return resp.data;
@@ -70,7 +70,7 @@ export const getTopRatedMovies = (page: number = 1): TopRatedMoviesAsync => {
     page,
   };
   return movieDBInstace.get(`/movie/top_rated`, {params}).then(resp => {
-    if (resp.status !== STATUS_CODES.ok) {
+    if (resp.status !== StatusCodes.ok) {
       throw new Error('TODO');
     }
     return resp.data;
@@ -83,7 +83,7 @@ export const getTrendingMovies = (page: number = 1): TrendingMoviesAsync => {
     page,
   };
   return movieDBInstace.get(`/movie/popular`, {params}).then(resp => {
-    if (resp.status !== STATUS_CODES.ok) {
+    if (resp.status !== StatusCodes.ok) {
       throw new Error('TODO');
     }
     return resp.data;
@@ -96,13 +96,29 @@ export const getUpcomingMovies = (page: number = 1): UpcomingMoviesAsync => {
     page,
   };
   return movieDBInstace.get(`/movie/upcoming`, {params}).then(resp => {
-    if (resp.status !== STATUS_CODES.ok) {
+    if (resp.status !== StatusCodes.ok) {
       throw new Error('TODO');
     }
     return resp.data;
   }) as UpcomingMoviesAsync;
 };
 
+/*
+ * Search
+ */
+type SearchAsync = Promise<PagedMovieList>;
+export const getSearch = (query: string, page: number = 1): SearchAsync => {
+  const params = {
+    query,
+    page,
+  };
+  return movieDBInstace.get(`/search/movie`, {params}).then(resp => {
+    if (resp.status !== StatusCodes.ok) {
+      throw new Error('TODO');
+    }
+    return resp.data;
+  }) as SearchAsync;
+};
 /*
  * Discover
  */
@@ -112,7 +128,7 @@ export const getUpcomingMovies = (page: number = 1): UpcomingMoviesAsync => {
 //     page,
 //   };
 //   return movieDBInstace.get(`/movie/${id}/similar`, {params}).then(resp => {
-//     if (resp.status !== STATUS_CODES.ok) {
+//     if (resp.status !== StatusCodes.ok) {
 //       throw new Error('TODO');
 //     }
 //     return resp.data as GetSimilarMovieAsync;

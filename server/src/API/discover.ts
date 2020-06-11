@@ -10,6 +10,9 @@ import {
   getUpcomingMovies,
 } from '../vendors/themoviedb';
 
+import {EndpointPrefix} from 'commontypes/api';
+const {topRated, trending, nowPlaying, upcoming} = EndpointPrefix;
+
 const router = express.Router();
 
 // router.get('/', cache(CACHE_DURATION), qCheck(), (req, res) => {
@@ -23,7 +26,7 @@ const router = express.Router();
 //     });
 // });
 
-router.get('/top_rated', cache(CACHE_DURATION), iParams(), (req, res) => {
+router.get(topRated, cache(CACHE_DURATION), iParams(), (req, res) => {
   const {page} = res.locals.q;
 
   getTopRatedMovies(page)
@@ -33,7 +36,8 @@ router.get('/top_rated', cache(CACHE_DURATION), iParams(), (req, res) => {
       console.log('twas the night of xmass and there was a bug: ', err);
     });
 });
-router.get('/trending', cache(CACHE_DURATION), iParams(), (req, res) => {
+
+router.get(trending, cache(CACHE_DURATION), iParams(), (req, res) => {
   const {page} = res.locals.q;
 
   getTrendingMovies(page)
@@ -43,7 +47,7 @@ router.get('/trending', cache(CACHE_DURATION), iParams(), (req, res) => {
       console.log('twas the night of xmass and there was a bug: ', err);
     });
 });
-router.get('/now_playing', cache(CACHE_DURATION), iParams(), (req, res) => {
+router.get(nowPlaying, cache(CACHE_DURATION), iParams(), (req, res) => {
   const {page} = res.locals.q;
 
   getNowPlayingMovies(page)
@@ -53,7 +57,7 @@ router.get('/now_playing', cache(CACHE_DURATION), iParams(), (req, res) => {
       console.log('twas the night of xmass and there was a bug: ', err);
     });
 });
-router.get('/upcoming', cache(CACHE_DURATION), iParams(), (req, res) => {
+router.get(upcoming, cache(CACHE_DURATION), iParams(), (req, res) => {
   const {page} = res.locals.q;
 
   getUpcomingMovies(page)

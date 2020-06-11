@@ -4,6 +4,9 @@ import {cache, iParams} from '../middleware';
 import {CACHE_DURATION} from '../config';
 import {getFullMovie, getSimilarMovies} from '../vendors/themoviedb';
 
+import {EndpointPrefix, PageParams} from 'commontypes/api';
+const {similar} = EndpointPrefix;
+
 const router = express.Router();
 
 router.get('/:id', cache(CACHE_DURATION), (req, res) => {
@@ -17,9 +20,9 @@ router.get('/:id', cache(CACHE_DURATION), (req, res) => {
     });
 });
 
-router.get('/:id/similar', cache(CACHE_DURATION), iParams(), (req, res) => {
+router.get(`/:id${similar}`, cache(CACHE_DURATION), iParams(), (req, res) => {
   const {id} = req.params;
-  const {page} = res.locals.q;
+  const page = res.locals[PageParams.page];
 
   getSimilarMovies(id, page)
     .then(res.send)

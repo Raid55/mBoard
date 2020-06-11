@@ -26,6 +26,7 @@
     "evergreen-ui": "4.27.4",
     "fontfaceobserver": "2.1.0",
     "history": "4.10.1",
+    "http-proxy-middleware": "1.0.4",
     "husky": "4.2.3",
     "i18next": "19.3.4",
     "i18next-browser-languagedetector": "4.0.2",
@@ -72,7 +73,6 @@
     "generate": "cross-env TS_NODE_PROJECT='./internals/ts-node.tsconfig.json' plop --plopfile internals/generators/plopfile.ts",
     "prettify": "prettier --write"
   },
-  "proxy": "http://localhost:8080",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -119,5 +119,8 @@
         "statements": 90
       }
     }
+  },
+  "devDependencies": {
+    "commontypes": "file:../commonTypes"
   }
 }

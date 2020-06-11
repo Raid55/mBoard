@@ -9,13 +9,17 @@ import styled from 'styled-components/macro';
 import { Pane, Heading, ChevronRightIcon } from 'evergreen-ui';
 
 import { PosterList } from '../PosterList';
-import { Poster } from '../PosterCard/types';
+import { MovieDetails } from 'commonTypes/movies';
 
 interface Props {
-  posters: Poster[];
+  posters: MovieDetails[];
   tabName: string;
   tabColor?: string;
   headerChild?: React.ReactNode;
+}
+
+interface Props {
+  posters: MovieDetails[];
 }
 
 export function ExpandablePosterList(props: Props) {

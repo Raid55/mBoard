@@ -21,6 +21,7 @@ import styled from 'styled-components/macro';
 
 import { reducer, sliceKey } from './slice';
 import { selectHomePage } from './selectors';
+import { selectSearchInput } from '../SearchSheet/selectors';
 import { homePageSaga } from './saga';
 
 import { Paginator } from '../../components/Paginator';
@@ -93,6 +94,8 @@ export function HomePage(props: Props) {
   useInjectSaga({ key: sliceKey, saga: homePageSaga });
 
   const homePage = useSelector(selectHomePage);
+  const searchValue = useSelector(selectSearchInput);
+
   const dispatch = useDispatch();
 
   const { path } = useRouteMatch();
@@ -109,21 +112,21 @@ export function HomePage(props: Props) {
         <title>home</title>
         <meta name="description" content="mBoard homepage" />
       </Helmet>
-      <SearchBox onAnyAction={openSearch} />
-      <ExpandablePosterList
+      <SearchBox onAnyAction={openSearch} value={searchValue} />
+      {/* <ExpandablePosterList
         posters={[]}
         tabName="Sci-Fi Flicks"
         tabColor="#FBE6A2"
-      />
+      /> */}
       <div>
         <Paginator />
       </div>
-      <ExpandablePosterList posters={TEMP_MOVIES} tabName={'Discover'} />
+      {/* <ExpandablePosterList posters={TEMP_MOVIES} tabName={'Discover'} />
       <ExpandablePosterList
         posters={TEMP_MOVIES}
         tabName="Action Movies"
         tabColor="#FAE2E2"
-      />
+      /> */}
       <Switch>
         <Route path="/search" component={SearchSheet} />
         <Route path="/movie/:id" component={MovieSideSheet} />

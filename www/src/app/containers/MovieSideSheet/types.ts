@@ -1,5 +1,5 @@
 import { BaseContainerState } from '../types';
-import { FullMovieDetails } from '../../../../../server/src/types/movies';
+import { FullMovieDetails } from 'commonTypes/movies';
 
 export enum MovieTabs {
   info = 'info',
@@ -11,7 +11,7 @@ export enum MovieTabs {
 /* --- STATE --- */
 export interface MovieSideSheetState extends BaseContainerState {
   movieID: number;
-  fullMovie: FullMovieDetails | null;
+  movie: FullMovieDetails | null;
   selectedTab: MovieTabs;
 }
 

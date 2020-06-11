@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction, RequestHandler} from 'express';
 
-import {SearchParams, PageParams} from '../types/api';
+import {SearchParams, PageParams} from 'commonTypes/api';
 
 // Params
 type Params = SearchParams | PageParams;

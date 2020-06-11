@@ -1,4 +1,4 @@
-import { MovieDetails } from '../../../../../server/src/types/movies';
+import { MovieDetails } from 'commonTypes/movies';
 import { BaseContainerState, BasePagedResults } from '../types';
 
 /* --- STATE --- */
