@@ -1,22 +1,32 @@
 {
   "HomePage": {
-    "discover": "Discover Movies",
-    "genere": {
-      "action": "Action",
-      "thriller": "Thriller"
-    }
+    "discover": "Discover Movies"
   },
   "MovieSideSheet": {
-    "info": {
-      "tabName": "Info"
+    "header": {
+      "runtime": "runtime",
+      "min": "Min.",
+      "rated": "rated",
+      "genre": "genre"
     },
-    "credits": {
-      "tabName": "Cast and Crew"
+    "info": {
+      "tabName": "Info",
+      "overview": "Overview",
+      "directed": "Directed by",
+      "produced": "Produced by",
+      "written": "Written by",
+      "starring": "Starring"
+    },
+    "cast": {
+      "tabName": "Cast"
+    },
+    "crew": {
+      "tabName": "Crew"
     },
     "reviews": {
       "tabName": "Reviews"
     },
-    "recommendations": {
+    "similar": {
       "tabName": "More Like This"
     }
   },
@@ -25,6 +35,6 @@
   },
   "PosterList": {
     "endList": "End of List",
-    "emptyList": "Tea for two and two for tea..."
+    "emptyList": "Empty List"
   }
 }

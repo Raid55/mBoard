@@ -3,17 +3,17 @@ import * as express from 'express';
 import {cache, iParams} from '../middleware';
 import {CACHE_DURATION} from '../config';
 import {getSearch} from '../vendors/themoviedb';
-import {PageParams, SearchParams} from 'commonTypes/api';
+import {PAGE_PARAMS, SEARCH_PARAMS} from 'commonTypes/api';
 
 const router = express.Router();
 
 router.get(
   '/',
   cache(CACHE_DURATION),
-  iParams([SearchParams.query]),
+  iParams([SEARCH_PARAMS.query]),
   (req, res) => {
-    const page = res.locals[PageParams.page];
-    const query = res.locals[SearchParams.query];
+    const page = res.locals[PAGE_PARAMS.page];
+    const query = res.locals[SEARCH_PARAMS.query];
 
     getSearch(query, page)
       .then(res.send)

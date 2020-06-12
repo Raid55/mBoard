@@ -1,11 +1,16 @@
 import { BaseContainerState } from '../types';
-import { FullMovieDetails } from 'commonTypes/movies';
+import { FullMovieDetails, MovieDetails } from 'commonTypes/movies';
 
 export enum MovieTabs {
   info = 'info',
-  credits = 'credits',
+  cast = 'cast',
+  crew = 'crew',
   reviews = 'reviews',
-  recs = 'recommendations',
+  similar = 'similar',
+}
+
+export enum VideoSites {
+  youtube = 'YouTube',
 }
 
 /* --- STATE --- */

@@ -1,14 +1,14 @@
-export declare enum PageParams {
+export declare enum PAGE_PARAMS {
     page = "page"
 }
-export declare enum SearchParams {
+export declare enum SEARCH_PARAMS {
     query = "query"
 }
-export declare enum StatusCodes {
+export declare enum STATUS_CODES {
     ok = 200,
     notFound = 404
 }
-export declare enum EndpointPrefix {
+export declare enum ENDPOINT_PRE {
     api = "/api",
     search = "/search",
     posters = "/posters",

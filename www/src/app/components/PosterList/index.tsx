@@ -3,7 +3,7 @@
  * PosterList
  *
  */
-import React, { Component, memo } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 
@@ -27,18 +27,16 @@ export const PosterList = memo((props: Props) => {
   const { t } = useTranslation('PosterList');
 
   return (
-    <ListPane overflow={overflow && 'auto'}>
+    <ListPane
+      overflow={overflow ? 'auto' : 'none'}
+      flexWrap={overflow ? 'no-wrap' : 'wrap'}
+    >
       {loading
-        ? [...Array(LOADING_POSTERS)].map(() => <PosterCard loading />)
-        : posters.length
-        ? posters.map(poster => (
-            <PosterCard
-              key={poster.id}
-              posterID={poster.id}
-              posterPath={poster.poster_path}
-              name={poster.title}
-            />
+        ? [...Array(LOADING_POSTERS)].map((e, idx) => (
+            <PosterCard key={idx} loading />
           ))
+        : posters.length
+        ? posters.map(poster => <PosterCard key={poster.id} poster={poster} />)
         : null}
       <ListCapPill text={posters.length ? t('endList') : t('emptyList')} />
     </ListPane>
@@ -56,11 +54,7 @@ const ListCapPill = props => {
 const ListPane = styled(Pane)`
   display: flex;
   flex-direction: row;
-  flex: 1;
   padding: 1rem;
   background-color: #f9f9fb;
   border: 1px solid #edf0f2;
 `;
-// const ListOverflowPane = styled(ListPane)`
-//   overflow: auto;
-// `;

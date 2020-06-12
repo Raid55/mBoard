@@ -15,21 +15,33 @@ import {
   useParams,
   useHistory,
   useRouteMatch,
+  useLocation,
 } from 'react-router-dom';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
 import { movieSideSheetSaga } from './saga';
 import { MovieTabs } from './types';
-import * as s from './selectors';
+import {
+  selectSelectedTab,
+  selectLoading,
+  selectMovie,
+  selectYTVideo,
+  selectUSCertification,
+} from './selectors';
 
 import {
   ContentSideSheet,
   SheetTabBar,
 } from '../../components/ContentSideSheet';
 import { MovieSheetHeader } from './MovieSheetHeader';
+import {
+  InfoSheet,
+  CastSheet,
+  CrewSheet,
+  SimilarSheet,
+} from './Sheets/Loadable';
 import { TabRoute } from '../../components/ContentSideSheet/types';
-import { Card, Heading, Pane } from 'evergreen-ui';
 
 interface Props {}
 
@@ -37,29 +49,38 @@ export function MovieSideSheet(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: movieSideSheetSaga });
 
-  const { id } = useParams();
   const { t } = useTranslation('MovieSideSheet');
-  const { path, url } = useRouteMatch();
-  const dispatch = useDispatch();
-  const history = useHistory();
 
-  const selectedTab = useSelector(s.selectSelectedTab);
-  const loading = useSelector(s.selectLoading);
+  const { id } = useParams();
+  const { path, url } = useRouteMatch();
+  const history = useHistory();
+  const location = useLocation();
+
+  const dispatch = useDispatch();
+
+  const movie = useSelector(selectMovie);
+  const loading = useSelector(selectLoading);
+  const selectedTab = useSelector(selectSelectedTab);
+  const ytVideo = useSelector(selectYTVideo);
+  const usCert = useSelector(selectUSCertification);
 
   useEffect(() => {
-    const pathEnd = history.location.pathname.split('/').pop() || '';
-    dispatch(actions.updateMovieID(id));
-    // dispatch(actions.loadInfo());
+    if (!loading && (!movie || id !== movie.id))
+      dispatch(actions.loadMovie(id));
+  }, [id]);
+
+  useEffect(() => {
+    const pathEnd = location.pathname.split('/').pop() || '';
     if (selectedTab !== pathEnd && pathEnd in MovieTabs)
       dispatch(actions.updateSelectedTab(pathEnd as MovieTabs));
-  }, [dispatch, history]);
+  }, [location]);
 
   const updateSelectedTab = useCallback(
     (tab: MovieTabs) => {
       dispatch(actions.updateSelectedTab(tab));
       history.push(`${url}/${tab}`);
     },
-    [dispatch, history, url],
+    [url],
   );
 
   const closeSideSheet = useCallback(() => {
@@ -70,62 +91,56 @@ export function MovieSideSheet(props: Props) {
   const tabRoutes: TabRoute<MovieTabs>[] = [
     {
       path: MovieTabs.info,
-      component: () => <Info text={MovieTabs.info} loading={loading} />,
+      component: () => <InfoSheet {...movie} loading={loading} />,
       name: t(`${MovieTabs.info}.tabName`),
     },
     {
-      path: MovieTabs.credits,
-      component: () => <Info text={MovieTabs.credits} loading={loading} />,
-      name: t(`${MovieTabs.credits}.tabName`),
+      path: MovieTabs.cast,
+      component: () => (
+        <CastSheet text={MovieTabs.cast as string} loading={loading} />
+      ),
+      name: t(`${MovieTabs.cast}.tabName`),
     },
     {
-      path: MovieTabs.reviews,
-      component: () => <Info text={MovieTabs.reviews} loading={loading} />,
-      name: t(`${MovieTabs.reviews}.tabName`),
+      path: MovieTabs.crew,
+      component: () => (
+        <CrewSheet text={MovieTabs.crew as string} loading={loading} />
+      ),
+      name: t(`${MovieTabs.crew}.tabName`),
     },
     {
-      path: MovieTabs.recs,
-      component: () => <Info text={MovieTabs.recs} loading={loading} />,
-      name: t(`${MovieTabs.recs}.tabName`),
+      path: MovieTabs.similar,
+      component: () => (
+        <SimilarSheet similar={movie?.similar} loading={loading} />
+      ),
+      name: t(`${MovieTabs.similar}.tabName`),
     },
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>lol</title>
-        <meta
-          name="description"
-          content={`Information about the movie: ${'lol'}`}
-        />
-      </Helmet>
-      <ContentSideSheet onClose={closeSideSheet}>
-        <MovieSheetHeader
-          posterPath="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg"
-          ytVideo="P6AaSMfXHbA"
-          year={1998}
-          runtime={121}
-          certification="PG-13"
-          genre={[1, 2]}
-          title="ad stupid"
-        />
-        <SheetTabBar<MovieTabs>
-          tabRoutes={tabRoutes}
-          selectedTab={selectedTab}
-          updateSelectedTab={updateSelectedTab}
-        />
-        <Switch>
-          {tabRoutes.map(route => (
-            <Route
-              key={route.path}
-              path={`${path}/${route.path}`}
-              component={route.component}
-            />
-          ))}
-          <Redirect path={path} to={`${url}/${selectedTab}`} />
-        </Switch>
-      </ContentSideSheet>
-    </>
+    <ContentSideSheet onClose={closeSideSheet}>
+      <MovieSheetHeader
+        {...movie}
+        ytVideo={ytVideo}
+        usCertification={usCert}
+        loading={loading}
+      />
+      <SheetTabBar<MovieTabs>
+        tabRoutes={tabRoutes}
+        selectedTab={selectedTab}
+        updateSelectedTab={updateSelectedTab}
+      />
+      <Switch>
+        {tabRoutes.map(route => (
+          <Route
+            key={route.path}
+            path={`${path}/${route.path}`}
+            component={route.component}
+          />
+        ))}
+        <Redirect path={path} to={`${url}/${selectedTab}`} />
+      </Switch>
+    </ContentSideSheet>
   );
 }
 
@@ -133,19 +148,3 @@ interface InfoProps {
   text: string;
   loading: boolean;
 }
-const Info = (props: InfoProps) => {
-  return (
-    <Pane flex="1" background="tint1" padding={16}>
-      <Card
-        backgroundColor="white"
-        elevation={0}
-        height={240}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Heading>{props.text}</Heading>
-      </Card>
-    </Pane>
-  );
-};

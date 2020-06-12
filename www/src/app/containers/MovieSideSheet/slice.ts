@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState, MovieTabs } from './types';
-import { FullMovieDetails } from 'commonTypes/movies';
+import { FullMovieDetails, MovieDetails } from 'commonTypes/movies';
 
 // The initial state of the MovieSideSheet container
 export const initialState: ContainerState = {
@@ -21,6 +21,7 @@ const movieSideSheetSlice = createSlice({
       state.err = false;
     },
     movieLoaded(state, action: PayloadAction<FullMovieDetails>) {
+      state.movieID = action.payload.id;
       state.movie = action.payload;
       state.loading = false;
     },
@@ -35,8 +36,7 @@ const movieSideSheetSlice = createSlice({
       state.selectedTab = initialState.selectedTab;
     },
     updateMovieID(state, action: PayloadAction<number>) {
-      state.movieID = action.payload;
-      state.err = false;
+      if (state.movieID !== action.payload) state.movieID = action.payload;
     },
   },
 });

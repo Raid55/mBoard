@@ -5,8 +5,8 @@ import * as path from 'path';
 import {fancyLog} from './middleware';
 import APIRoutes from './API';
 
-import {EndpointPrefix} from 'commontypes/api';
-const {api} = EndpointPrefix;
+import {ENDPOINT_PRE} from 'commontypes/api';
+const {api} = ENDPOINT_PRE;
 
 const app = express();
 

@@ -1,10 +1,10 @@
 import {Request, Response, NextFunction, RequestHandler} from 'express';
 
-import {SearchParams, PageParams} from 'commonTypes/api';
+import {SEARCH_PARAMS, PAGE_PARAMS} from 'commonTypes/api';
 
 // Params
-type Params = SearchParams | PageParams;
-const ParamsKeys = Object.values(Object.assign({}, SearchParams, PageParams));
+type Params = SEARCH_PARAMS | PAGE_PARAMS;
+const ParamsKeys = Object.values(Object.assign({}, SEARCH_PARAMS, PAGE_PARAMS));
 
 type ParamsCheck = {
   [key in Params]: (query: string) => any;
@@ -12,8 +12,8 @@ type ParamsCheck = {
 
 // Params Checkers
 const paramsChecks: ParamsCheck = {
-  [PageParams.page]: (q: string) => parseInt(q) || 1,
-  [SearchParams.query]: (q: string) => q,
+  [PAGE_PARAMS.page]: (q: string) => parseInt(q) || 1,
+  [SEARCH_PARAMS.query]: (q: string) => q,
 };
 export default function (required: Params[] = []): RequestHandler {
   return (req: Request, res: Response, next: NextFunction): void => {

@@ -1,107 +1,43 @@
-// import { take, call, put, select, takeLatest } from 'redux-saga/effects';
-// import { actions } from './slice';
+import {
+  take,
+  call,
+  all,
+  put,
+  select,
+  delay,
+  takeLatest,
+} from 'redux-saga/effects';
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import { PayloadAction } from '@reduxjs/toolkit';
 
-// export function* updateInfo() {
-//   const
-// }
+import { actions } from './slice';
+import { FullMovieDetails } from 'commonTypes/movies';
+import { ENDPOINT_PRE } from 'commontypes/api';
+const { api, movie } = ENDPOINT_PRE;
 
-export function* movieSideSheetSaga() {
-  // yield takeLatest(actions.updateMovieID.type, doSomething);
+function* getFullMovie(action: PayloadAction<string>) {
+  try {
+    const resp: AxiosResponse = yield call(
+      axios.get,
+      `${api}${movie}/${action.payload}`,
+    );
+    const data: FullMovieDetails = resp.data;
+
+    // better check
+    if (data.title) {
+      yield put(actions.movieLoaded(data));
+    } else {
+      yield put(actions.movieError());
+    }
+  } catch (err) {
+    if ((err as AxiosError).response?.status === 404) {
+      yield put(actions.movieError());
+    } else {
+      yield put(actions.movieError());
+    }
+  }
 }
 
-// import { call, put, select, takeLatest, delay } from 'redux-saga/effects';
-// import { request } from 'utils/request';
-// import { selectUsername } from './selectors';
-// import { actions } from './slice';
-// import { Repo } from 'types/Repo';
-// import { RepoErrorType } from './types';
-
-// /**
-//  * Github repos request/response handler
-//  */
-// export function* getRepos() {
-//   yield delay(500);
-//   // Select username from store
-//   const username: string = yield select(selectUsername);
-//   if (username.length === 0) {
-//     yield put(actions.repoError(RepoErrorType.USERNAME_EMPTY));
-//     return;
-//   }
-//   const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-
-//   try {
-//     // Call our request helper (see 'utils/request')
-//     const repos: Repo[] = yield call(request, requestURL);
-//     if (repos?.length > 0) {
-//       yield put(actions.reposLoaded(repos));
-//     } else {
-//       yield put(actions.repoError(RepoErrorType.USER_HAS_NO_REPO));
-//     }
-//   } catch (err) {
-//     if (err.response?.status === 404) {
-//       yield put(actions.repoError(RepoErrorType.USER_NOT_FOUND));
-//     } else if (err.message === 'Failed to fetch') {
-//       yield put(actions.repoError(RepoErrorType.GITHUB_RATE_LIMIT));
-//     } else {
-//       yield put(actions.repoError(RepoErrorType.RESPONSE_ERROR));
-//     }
-//   }
-// }
-
-// /**
-//  * Root saga manages watcher lifecycle
-//  */
-// export function* githubRepoFormSaga() {
-//   // Watches for loadRepos actions and calls getRepos when one comes in.
-//   // By using `takeLatest` only the result of the latest API call is applied.
-//   // It returns task descriptor (just like fork) so we can continue execution
-//   // It will be cancelled automatically on component unmount
-//   yield takeLatest(actions.loadRepos.type, getRepos);
-// }
-
-// import {
-//   take,
-//   call,
-//   all,
-//   put,
-//   select,
-//   delay,
-//   takeLatest,
-// } from 'redux-saga/effects';
-// import axios, { AxiosResponse, AxiosError } from 'axios';
-// import { actions } from './slice';
-// import { PagedMovieList } from 'commonTypes/movies';
-
-// function* getSearchResults() {
-//   const query: string = yield select(selectSearchInput);
-//   const page: number = yield select(selectSearchPage);
-//   const params = {
-//     query,
-//     page,
-//   };
-
-//   try {
-//     const resp: AxiosResponse = yield call(axios.get, '/api/search', {
-//       params,
-//     });
-//     const data: PagedMovieList = resp.data;
-//     console.log(resp);
-//     if (data.results && data.results.length > 0) {
-//       yield put(actions.searchLoaded(data));
-//     } else {
-//       yield put(actions.error());
-//     }
-//   } catch (err) {
-//     if ((err as AxiosError).response?.status === 404) {
-//       yield put(actions.error());
-//     } else {
-//       yield put(actions.error());
-//     }
-//   }
-// }
-// export function* searchSheetSaga() {
-//   yield all([
-//     takeLatest(actions.searchInputUpdated.type, handleSearchInput),
-//     takeLatest(actions.loadSearch.type, getSearchResults),
-//   ]);
-// }
+export function* movieSideSheetSaga() {
+  yield takeLatest(actions.loadMovie.type, getFullMovie);
+}

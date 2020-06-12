@@ -4,19 +4,21 @@
  *
  */
 import React, { useState } from 'react';
+import YouTube from 'react-youtube';
 import styled from 'styled-components/macro';
 
 import { Dialog, Button } from 'evergreen-ui';
-import YouTube from 'react-youtube';
+import { VideoDetails } from 'commontypes/movies';
 
 interface Props {
-  video?: string;
+  video?: VideoDetails;
 }
 
 export function WatchYTVideo(props: Props) {
   const { video } = props;
   const [closed, setClosed] = useState(true);
 
+  // hard coded... not optimal
   const opts = {
     height: '390',
     width: '640',
@@ -31,11 +33,12 @@ export function WatchYTVideo(props: Props) {
         width="auto"
         hasFooter={false}
       >
-        <YouTube videoId={video} opts={opts} />
+        <YouTube videoId={(video || {}).key} opts={opts} />
       </Dialog>
       <Button
         textAlign="center"
         marginX="auto"
+        marginY="1%"
         width="100%"
         iconBefore="play"
         onClick={() => setClosed(false)}

@@ -34,14 +34,18 @@ const searchSheetSlice = createSlice({
     searchLoaded(state, action: PayloadAction<PagedMovieList>) {
       const { results, page, total_pages } = action.payload;
 
-      console.log(results);
       state.results[page] = results;
       state.totalPages = total_pages;
       state.page = page;
       state.loading = false;
     },
     clearSearch(state) {
-      state = initialState;
+      state.err = initialState.err;
+      state.loading = initialState.loading;
+      state.searchValue = initialState.searchValue;
+      state.totalPages = initialState.totalPages;
+      state.page = initialState.page;
+      state.results = initialState.results;
     },
     error(state) {
       state.err = true;

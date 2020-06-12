@@ -6,8 +6,8 @@ import discoverRouter from './discover';
 import postersRouter from './posters';
 import searchRouter from './search';
 
-import {EndpointPrefix} from 'commontypes/api';
-const {movie, discover, posters, search} = EndpointPrefix;
+import {ENDPOINT_PRE} from 'commontypes/api';
+const {movie, discover, posters, search} = ENDPOINT_PRE;
 
 const router = express.Router();
 

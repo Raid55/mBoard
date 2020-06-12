@@ -12,12 +12,12 @@ import { actions } from './slice';
 import { PagedMovieList } from 'commonTypes/movies';
 import { selectSearchInput, selectSearchPage } from './selectors';
 
-const SEARCH_DEBOUNCE_DELAY = 2420;
+const SEARCH_DEBOUNCE_DELAY = 2024;
 
-function* handleSearchInput(input) {
+function* handleSearchInput(action) {
   yield delay(SEARCH_DEBOUNCE_DELAY);
 
-  if (input.length === 0) yield put(actions.clearSearch());
+  if (action.payload.length == 0) yield put(actions.clearSearch());
   else yield put(actions.loadSearch());
 }
 
@@ -34,7 +34,7 @@ function* getSearchResults() {
       params,
     });
     const data: PagedMovieList = resp.data;
-    console.log(resp);
+
     if (data.results && data.results.length > 0) {
       yield put(actions.searchLoaded(data));
     } else {

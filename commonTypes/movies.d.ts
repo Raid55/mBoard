@@ -8,12 +8,6 @@ export declare enum MOVIE_STATUS {
     released = "Released",
     canceled = "Canceled"
 }
-export declare enum PageParams {
-    page = "page"
-}
-export declare enum SearchParams {
-    query = "query"
-}
 export declare enum US_MOVIE_CERTS {
     g = "G",
     pg = "PG",
@@ -27,8 +21,28 @@ export declare enum CREW_HIGHLIGHT {
     screenplay = "Screenplay",
     producer = "Producer"
 }
-interface MovieGenre {
-    id: number;
+export declare enum MOVIE_GENRES {
+    Action = 28,
+    Adventure = 12,
+    Animation = 16,
+    Comedy = 35,
+    Crime = 80,
+    Documentary = 99,
+    Drama = 18,
+    Family = 10751,
+    Fantasy = 14,
+    History = 36,
+    Horror = 27,
+    Music = 10402,
+    Mystery = 9648,
+    Romance = 10749,
+    SciFi = 878,
+    Thriller = 53,
+    Western = 37,
+    War = 10752
+}
+export interface MovieGenre {
+    id: MOVIE_GENRES;
     name: string;
 }
 interface SpokenLanguage {
@@ -65,7 +79,7 @@ interface ReleaseCountryCert {
     release_dates: ReleaseCert[];
 }
 declare type ReleaseCertList = ResultList<ReleaseCountryCert>;
-interface VideoDetails {
+export interface VideoDetails {
     id: string;
     iso_639_1: string;
     iso_3166_1: string;
@@ -79,7 +93,7 @@ declare type VideoList = ResultList<VideoDetails>;
 export interface MovieDetails {
     adult: boolean;
     backdrop_path: string;
-    genre_ids: number[];
+    genre_ids: MOVIE_GENRES[];
     id: number;
     original_language: string;
     original_title: string;

@@ -10,8 +10,8 @@ import {
   getUpcomingMovies,
 } from '../vendors/themoviedb';
 
-import {EndpointPrefix} from 'commontypes/api';
-const {topRated, trending, nowPlaying, upcoming} = EndpointPrefix;
+import {ENDPOINT_PRE} from 'commontypes/api';
+const {topRated, trending, nowPlaying, upcoming} = ENDPOINT_PRE;
 
 const router = express.Router();
 

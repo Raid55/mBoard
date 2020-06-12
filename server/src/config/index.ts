@@ -1,4 +1,4 @@
-// import {Config} from '../types';
+require('dotenv').config();
 
 export const PORT = process.env.PORT || 8080;
 export const MOVIEDB_POSTER_CDN =
@@ -10,5 +10,5 @@ export const MOVIEDB = {
   POSTER_SIZE: process.env.POSTER_SIZE || '/w500',
 };
 
-export const MOVIEDB_ACCESS_TOKEN = process.env.MOVIEDB_ACCESS_TOKEN || '';
+export const MOVIEDB_ACCESS_TOKEN = process.env.MOVIEDB_ACCESS_TOKEN;
 export const CACHE_DURATION = 900;

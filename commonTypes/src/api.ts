@@ -1,16 +1,16 @@
-export enum PageParams {
+export enum PAGE_PARAMS {
   page = "page",
 }
-export enum SearchParams {
+export enum SEARCH_PARAMS {
   query = "query",
 }
 
-export enum StatusCodes {
+export enum STATUS_CODES {
   ok = 200,
   notFound = 404,
 }
 
-export enum EndpointPrefix {
+export enum ENDPOINT_PRE {
   api = "/api",
   search = "/search",
   posters = "/posters",
