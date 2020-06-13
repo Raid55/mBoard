@@ -28,6 +28,7 @@ import {
   selectMovie,
   selectYTVideo,
   selectUSCertification,
+  selectCredits,
 } from './selectors';
 
 import {
@@ -63,6 +64,7 @@ export function MovieSideSheet(props: Props) {
   const selectedTab = useSelector(selectSelectedTab);
   const ytVideo = useSelector(selectYTVideo);
   const usCert = useSelector(selectUSCertification);
+  const credits = useSelector(selectCredits);
 
   useEffect(() => {
     if (!loading && (!movie || id !== movie.id))
@@ -91,21 +93,19 @@ export function MovieSideSheet(props: Props) {
   const tabRoutes: TabRoute<MovieTabs>[] = [
     {
       path: MovieTabs.info,
-      component: () => <InfoSheet {...movie} loading={loading} />,
+      component: () => (
+        <InfoSheet {...movie} credits={credits} loading={loading} />
+      ),
       name: t(`${MovieTabs.info}.tabName`),
     },
     {
       path: MovieTabs.cast,
-      component: () => (
-        <CastSheet text={MovieTabs.cast as string} loading={loading} />
-      ),
+      component: () => <CastSheet cast={credits.cast} loading={loading} />,
       name: t(`${MovieTabs.cast}.tabName`),
     },
     {
       path: MovieTabs.crew,
-      component: () => (
-        <CrewSheet text={MovieTabs.crew as string} loading={loading} />
-      ),
+      component: () => <CrewSheet crew={credits.crew} loading={loading} />,
       name: t(`${MovieTabs.crew}.tabName`),
     },
     {

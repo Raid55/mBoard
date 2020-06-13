@@ -10,13 +10,12 @@ import { Link } from 'react-router-dom';
 import { Card, Heading, Spinner } from 'evergreen-ui';
 import { PosterImg } from '../PosterImg';
 
+import { BaseProps } from '../types';
 import { MovieDetails } from 'commonTypes/movies';
 import { ENDPOINT_PRE } from 'commonTypes/api';
-const { movie } = ENDPOINT_PRE;
 
-interface Props {
+interface Props extends BaseProps {
   poster?: MovieDetails;
-  loading?: boolean;
 }
 
 export const PosterCard = memo((props: Props) => {
@@ -25,7 +24,7 @@ export const PosterCard = memo((props: Props) => {
   return loading ? (
     <PosterLoading />
   ) : poster ? (
-    <PosterLink to={`${movie}/${poster?.id}`}>
+    <PosterLink to={`${ENDPOINT_PRE.movie}/${poster?.id}`}>
       <PosterContent posterPath={poster?.poster_path} name={poster?.title} />
     </PosterLink>
   ) : null;

@@ -8,7 +8,7 @@ export const initialState: ContainerState = {
   err: false,
   loading: false,
   movieID: 0,
-  movie: null,
+  movie: {},
   selectedTab: MovieTabs.info,
 };
 

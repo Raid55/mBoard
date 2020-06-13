@@ -7,35 +7,35 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 import { Pane, Heading, ChevronRightIcon } from 'evergreen-ui';
+import { Paginator } from '../Paginator';
 
 import { PosterList } from '../PosterList';
+import { BaseProps } from '../types';
 import { MovieDetails } from 'commonTypes/movies';
 
-interface Props {
+interface Props extends BaseProps {
   posters: MovieDetails[];
-  tabName: string;
+  tabName?: string;
   tabColor?: string;
-  headerChild?: React.ReactNode;
-}
-
-interface Props {
-  posters: MovieDetails[];
+  overflow?: boolean;
 }
 
 export function ExpandablePosterList(props: Props) {
-  const { tabColor, tabName, posters, headerChild } = props;
+  const { tabColor, tabName, posters, overflow, loading } = props;
   const defaultColor = '#DDEBF7';
 
   return (
     <ListContainer>
-      <ListHeader>
-        <ListTab color={tabColor || defaultColor}>
-          <TabText>{tabName}</TabText>
-          <ChevronRightIcon marginY="auto" size={25} />
-        </ListTab>
-        {headerChild}
-      </ListHeader>
-      <PosterList posters={posters} />
+      {tabName && (
+        <ListHeader>
+          <ListTab color={tabColor || defaultColor}>
+            <TabText>{tabName}</TabText>
+            <ChevronRightIcon marginY="auto" size={25} />
+          </ListTab>
+          <Paginator />
+        </ListHeader>
+      )}
+      <PosterList posters={posters} loading={loading} overflow={overflow} />
     </ListContainer>
   );
 }
@@ -43,9 +43,8 @@ export function ExpandablePosterList(props: Props) {
 const ListContainer = styled(Pane)`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 100%%;
   height: auto;
-  margin: 0.5rem auto;
 `;
 
 const ListHeader = styled.div`

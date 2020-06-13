@@ -27,7 +27,7 @@ import { searchSheetSaga } from './saga';
 
 import { SideSheet, Position } from 'evergreen-ui';
 import { SearchBox } from './searchBox';
-import { PosterList } from '../../components/PosterList';
+import { ExpandablePosterList } from '../../components/ExpandablePosterList';
 interface Props {}
 
 export function SearchSheet(props: Props) {
@@ -72,7 +72,11 @@ export function SearchSheet(props: Props) {
       onCloseComplete={closeSearchSheet}
     >
       <SearchBox ref={anchorTab} value={searchValue} onInput={onSearchInput} />
-      <PosterList posters={pageResults || []} loading={loading} overflow />
+      <ExpandablePosterList
+        posters={pageResults || []}
+        loading={loading}
+        overflow
+      />
     </SideSheet>
   );
 }

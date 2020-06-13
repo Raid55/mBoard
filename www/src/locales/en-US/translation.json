@@ -7,21 +7,28 @@
       "runtime": "runtime",
       "min": "Min.",
       "rated": "rated",
-      "genre": "genre"
+      "genre": "genre",
+      "noYear": "No Year"
     },
     "info": {
       "tabName": "Info",
       "overview": "Overview",
-      "directed": "Directed by",
-      "produced": "Produced by",
-      "written": "Written by",
-      "starring": "Starring"
+      "Director": "Directed by",
+      "Producer": "Produced by",
+      "Screenplay": "Screenplay by",
+      "starring": "Starring",
+      "budget": "Budget",
+      "revenue": "Box Office",
+      "release": "Release Date",
+      "noReleaseDate": "No Release Date",
+      "noEntries": "No Entries"
     },
     "cast": {
       "tabName": "Cast"
     },
     "crew": {
-      "tabName": "Crew"
+      "tabName": "Crew",
+      "noEntries": "No Entries"
     },
     "reviews": {
       "tabName": "Reviews"

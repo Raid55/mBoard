@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Button, IconButton } from 'evergreen-ui';
+import { IconButton, Paragraph } from 'evergreen-ui';
 
 interface Props {}
 // totalPages: number;
@@ -15,13 +15,9 @@ interface Props {}
 export function Paginator(props: Props) {
   return (
     <Div>
-      <IconButton />
-      <Button borderRadius={0}>1</Button>
-      <Button borderRadius={0}>2</Button>
-      <Button borderRadius={0}>3</Button>
-      <Button borderRadius={0}>4</Button>
-      <Button borderRadius={0}>5</Button>
-      <IconButton />
+      <IconButton icon="chevron-left" marginX={4} />
+      <Paragraph>Page 1 of 10</Paragraph>
+      <IconButton icon="chevron-right" marginX={4} />
     </Div>
   );
 }
@@ -29,4 +25,5 @@ export function Paginator(props: Props) {
 const Div = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;

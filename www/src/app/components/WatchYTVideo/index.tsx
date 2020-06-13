@@ -5,7 +5,6 @@
  */
 import React, { useState } from 'react';
 import YouTube from 'react-youtube';
-import styled from 'styled-components/macro';
 
 import { Dialog, Button } from 'evergreen-ui';
 import { VideoDetails } from 'commontypes/movies';
@@ -49,5 +48,3 @@ export function WatchYTVideo(props: Props) {
     </>
   );
 }
-
-const Div = styled.div``;

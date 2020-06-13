@@ -16,7 +16,7 @@ export enum VideoSites {
 /* --- STATE --- */
 export interface MovieSideSheetState extends BaseContainerState {
   movieID: number;
-  movie: FullMovieDetails | null;
+  movie: FullMovieDetails | { [key: string]: any };
   selectedTab: MovieTabs;
 }
 

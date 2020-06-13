@@ -21,8 +21,8 @@ export enum US_MOVIE_CERTS {
 
 export enum CREW_HIGHLIGHT {
   director = "Director",
-  screenplay = "Screenplay",
   producer = "Producer",
+  screenplay = "Screenplay",
 }
 
 export enum MOVIE_GENRES {
@@ -56,16 +56,16 @@ interface SpokenLanguage {
   name: string;
 }
 
-interface CreditsCast extends PeopleDetails {
+export interface CreditsCast extends PeopleDetails {
   character: string;
   order: number;
 }
-interface CreditsCrew extends PeopleDetails {
+export interface CreditsCrew extends PeopleDetails {
   department: string;
   job: CREW_HIGHLIGHT | string;
 }
 
-interface MovieCredits {
+export interface MovieCredits {
   cast: CreditsCast[];
   crew: CreditsCrew[];
 }

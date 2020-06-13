@@ -7,14 +7,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
 import { Spinner } from 'evergreen-ui';
-
+import { BaseProps } from '../types';
 import { ENDPOINT_PRE } from 'commonTypes/api';
-const { api, posters } = ENDPOINT_PRE;
 
-interface Props {
+interface Props extends BaseProps {
   posterPath?: string;
   name?: string;
-  loading?: boolean;
 }
 
 export function PosterImg(props: Props) {
@@ -29,7 +27,9 @@ export function PosterImg(props: Props) {
   ) : (
     <Img
       src={
-        posterPath && !backupImg ? `${api}${posters}${posterPath}` : NO_IMAGE
+        posterPath && !backupImg
+          ? `${ENDPOINT_PRE.api}${ENDPOINT_PRE.posters}${posterPath}`
+          : NO_IMAGE
       }
       alt={name}
       onError={() => showBackupImg(true)}

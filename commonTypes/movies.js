@@ -22,8 +22,8 @@ var US_MOVIE_CERTS;
 var CREW_HIGHLIGHT;
 (function (CREW_HIGHLIGHT) {
     CREW_HIGHLIGHT["director"] = "Director";
-    CREW_HIGHLIGHT["screenplay"] = "Screenplay";
     CREW_HIGHLIGHT["producer"] = "Producer";
+    CREW_HIGHLIGHT["screenplay"] = "Screenplay";
 })(CREW_HIGHLIGHT = exports.CREW_HIGHLIGHT || (exports.CREW_HIGHLIGHT = {}));
 var MOVIE_GENRES;
 (function (MOVIE_GENRES) {

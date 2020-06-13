@@ -34,6 +34,8 @@ export function MovieSheetHeader(props: Props) {
     usCertification,
   } = props;
 
+  const { t } = useTranslation('MovieSideSheet');
+
   return (
     <SheetHeader>
       {loading ? (
@@ -57,8 +59,10 @@ export function MovieSheetHeader(props: Props) {
             <TitlePane>
               <Heading size={600}>{title}</Heading>
               <Paragraph size={400} color="muted">
-                ({new Date(release_date || '').getFullYear() || 'No Year'})
-                {' - '}
+                (
+                {new Date(release_date || '').getFullYear() ||
+                  t('header.noYear')}
+                ){' - '}
                 {status && <StatusBadge status={status} />}
               </Paragraph>
             </TitlePane>

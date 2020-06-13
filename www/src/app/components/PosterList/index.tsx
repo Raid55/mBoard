@@ -8,17 +8,15 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 
 import { Pane, Card, Pill } from 'evergreen-ui';
-
 import { PosterCard } from '../PosterCard';
-
+import { BaseProps } from '../types';
 import { MovieDetails } from 'commonTypes/movies';
 
 const LOADING_POSTERS = 18;
 
-interface Props {
+interface Props extends BaseProps {
   posters: MovieDetails[];
   overflow?: boolean;
-  loading?: boolean;
 }
 
 export const PosterList = memo((props: Props) => {

@@ -10,7 +10,7 @@ import {
   getUpcomingMovies,
 } from '../vendors/themoviedb';
 
-import {ENDPOINT_PRE} from 'commontypes/api';
+import {ENDPOINT_PRE, PAGE_PARAMS} from 'commontypes/api';
 const {topRated, trending, nowPlaying, upcoming} = ENDPOINT_PRE;
 
 const router = express.Router();
@@ -27,7 +27,7 @@ const router = express.Router();
 // });
 
 router.get(topRated, cache(CACHE_DURATION), iParams(), (req, res) => {
-  const {page} = res.locals.q;
+  const page = res.locals[PAGE_PARAMS.page];
 
   getTopRatedMovies(page)
     .then(res.send)
@@ -38,7 +38,7 @@ router.get(topRated, cache(CACHE_DURATION), iParams(), (req, res) => {
 });
 
 router.get(trending, cache(CACHE_DURATION), iParams(), (req, res) => {
-  const {page} = res.locals.q;
+  const page = res.locals[PAGE_PARAMS.page];
 
   getTrendingMovies(page)
     .then(res.send)
@@ -48,7 +48,7 @@ router.get(trending, cache(CACHE_DURATION), iParams(), (req, res) => {
     });
 });
 router.get(nowPlaying, cache(CACHE_DURATION), iParams(), (req, res) => {
-  const {page} = res.locals.q;
+  const page = res.locals[PAGE_PARAMS.page];
 
   getNowPlayingMovies(page)
     .then(res.send)
@@ -58,7 +58,7 @@ router.get(nowPlaying, cache(CACHE_DURATION), iParams(), (req, res) => {
     });
 });
 router.get(upcoming, cache(CACHE_DURATION), iParams(), (req, res) => {
-  const {page} = res.locals.q;
+  const page = res.locals[PAGE_PARAMS.page];
 
   getUpcomingMovies(page)
     .then(res.send)
