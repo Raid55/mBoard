@@ -26,7 +26,7 @@ export function Paginator(props: Props) {
         icon="chevron-left"
         marginX={4}
         onClick={() => handlePageClick && page && handlePageClick(page - 1)}
-        disable={page == 1}
+        disabled={page == 1}
       />
       <P>{`${t('paginator.page')} ${page} ${t(
         'paginator.of',
@@ -35,7 +35,7 @@ export function Paginator(props: Props) {
         icon="chevron-right"
         marginX={4}
         onClick={() => handlePageClick && page && handlePageClick(page + 1)}
-        disable={page == totalPages}
+        disabled={page == totalPages}
       />
     </Div>
   );
