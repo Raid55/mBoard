@@ -42,7 +42,7 @@ export function WatchYTVideo(props: Props) {
         iconBefore="video"
         intent="danger"
         onClick={() => setClosed(false)}
-        disable={video ? false : true}
+        disabled={video ? false : true}
       >
         Trailer
       </Button>
