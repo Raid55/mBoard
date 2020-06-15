@@ -20,12 +20,10 @@ router.get('/', cache(CACHE_DURATION), iParams(), (req, res) => {
 
   new Promise(resolve => resolve())
     .then(() => {
-      console.log(filter);
       switch (filter) {
         case DISCOVER_FILTERS.trending:
           return getTrendingMovies(page);
         case DISCOVER_FILTERS.topRated:
-          console.log('wadsd wkamlmwks');
           return getTopRatedMovies(page);
         case DISCOVER_FILTERS.nowPlaying:
           return getNowPlayingMovies(page);

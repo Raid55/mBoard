@@ -9,7 +9,6 @@ router.use(
   '/',
   proxy(MOVIEDB.CDN_HOST, {
     proxyReqPathResolver: req => {
-      console.log(MOVIEDB.BASE_PATH + MOVIEDB.POSTER_SIZE + req.url);
       return MOVIEDB.BASE_PATH + MOVIEDB.POSTER_SIZE + req.url;
     },
   })
