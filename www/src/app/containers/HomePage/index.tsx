@@ -50,12 +50,12 @@ export function HomePage(props: Props) {
     (filterKey: DISCOVER_FILTERS, page?: number) => {
       dispatch(actions.loadFilteredList({ filterKey, page }));
     },
-    [],
+    [dispatch],
   );
 
   const openSearch = useCallback(() => {
     history.push('/search');
-  }, []);
+  }, [history]);
 
   return (
     <>
@@ -68,13 +68,25 @@ export function HomePage(props: Props) {
       {Object.values(DISCOVER_FILTERS).map(filter => (
         <ExpandablePosterList
           key={filter}
-          posters={(lists[filter] && lists[filter]?.pages[1]) || []}
+          posters={
+            (lists[filter] && lists[filter]!.pages[lists[filter]!.page]) || []
+          }
           name={filter}
           onLoad={loadFilteredList}
           tabColor="#FBE6A2"
           overflow
-          loading={lists[filter] && lists[filter]?.pages[1] ? false : true}
-        />
+          loading={
+            lists[filter] && lists[filter]!.pages[lists[filter]!.page]
+              ? false
+              : true
+          }
+        >
+          <Paginator
+            page={lists[filter] && lists[filter]?.page}
+            handlePageClick={page => loadFilteredList(filter, page)}
+            totalPages={lists[filter] && lists[filter]?.totalPages}
+          />
+        </ExpandablePosterList>
       ))}
 
       <Switch>

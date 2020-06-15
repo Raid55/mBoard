@@ -28,7 +28,9 @@ export function Paginator(props: Props) {
         onClick={() => handlePageClick && page && handlePageClick(page - 1)}
         disable={page == 1}
       />
-      <P>{`${t('paginator.page')}${page}${t('paginator.of')}${totalPages}`}</P>
+      <P>{`${t('paginator.page')} ${page} ${t(
+        'paginator.of',
+      )} ${totalPages}`}</P>
       <IconButton
         icon="chevron-right"
         marginX={4}

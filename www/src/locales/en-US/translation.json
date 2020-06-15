@@ -40,6 +40,12 @@
   "SearchSheet": {
     "searchBox": "Search for movie..."
   },
+  "components": {
+    "paginator": {
+      "page": "Page",
+      "of": "of"
+    }
+  },
   "PosterList": {
     "endList": "End of List",
     "emptyList": "Empty List"
