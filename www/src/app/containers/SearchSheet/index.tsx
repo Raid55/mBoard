@@ -54,16 +54,13 @@ export function SearchSheet(props: Props) {
 
   const closeSearchSheet = useCallback(() => {
     history.push('/');
-  }, [dispatch, history]);
+  }, []);
 
-  const onSearchInput = useCallback(
-    (e: SyntheticEvent) => {
-      dispatch(
-        actions.searchInputUpdated((e.target as HTMLTextAreaElement).value),
-      );
-    },
-    [dispatch, actions],
-  );
+  const onSearchInput = useCallback((e: SyntheticEvent) => {
+    dispatch(
+      actions.searchInputUpdated((e.target as HTMLTextAreaElement).value),
+    );
+  }, []);
 
   return (
     <SideSheet
@@ -72,11 +69,7 @@ export function SearchSheet(props: Props) {
       onCloseComplete={closeSearchSheet}
     >
       <SearchBox ref={anchorTab} value={searchValue} onInput={onSearchInput} />
-      <ExpandablePosterList
-        posters={pageResults || []}
-        loading={loading}
-        overflow
-      />
+      <ExpandablePosterList posters={pageResults} overflow loading={loading} />
     </SideSheet>
   );
 }

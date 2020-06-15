@@ -23,7 +23,7 @@ export function PosterImg(props: Props) {
     'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png';
 
   return loading ? (
-    <HeaderLoading />
+    <Spinner alignSelf="center" height={400} />
   ) : (
     <Img
       src={
@@ -36,9 +36,6 @@ export function PosterImg(props: Props) {
     />
   );
 }
-const HeaderLoading = () => {
-  return <Spinner alignSelf="center" height={400} />;
-};
 
 const Img = styled.img`
   width: 100%;

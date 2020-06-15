@@ -3,7 +3,11 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'types';
 import { initialState } from './slice';
 import { VideoSites } from './types';
-import { MovieCredits, US_MOVIE_CERTS } from 'commontypes/movies';
+import {
+  MovieCredits,
+  FullMovieDetails,
+  US_MOVIE_CERTS,
+} from 'commontypes/movies';
 
 const selectDomain = (state: RootState) => state.movieSideSheet || initialState;
 
@@ -13,7 +17,7 @@ export const selectSelectedTab = createSelector(
 );
 
 export const selectMovie = createSelector([selectDomain], sd =>
-  sd.movie.id ? sd.movie : {},
+  sd.movie.id ? (sd.movie as FullMovieDetails) : ({} as { [key: string]: any }),
 );
 export const selectMovieID = createSelector([selectDomain], sd => sd.movieID);
 

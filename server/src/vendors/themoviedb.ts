@@ -38,9 +38,8 @@ export const getSimilarMovies = (
   id: string,
   page: number = 1
 ): SimilarMovieAsync => {
-  const params = {
-    page,
-  };
+  const params = {page};
+
   return movieDBInstace.get(`/movie/${id}/similar`, {params}).then(resp => {
     if (resp.status !== STATUS_CODES.ok) {
       throw new Error('TODO');
@@ -53,10 +52,9 @@ type NowPlayingMoviesAsync = Promise<PagedMovieList>;
 export const getNowPlayingMovies = (
   page: number = 1
 ): NowPlayingMoviesAsync => {
-  const params = {
-    page,
-  };
-  return movieDBInstace.get(`/movie/now_playing`, {params}).then(resp => {
+  const params = {page};
+
+  return movieDBInstace.get('/movie/now_playing', {params}).then(resp => {
     if (resp.status !== STATUS_CODES.ok) {
       throw new Error('TODO');
     }
@@ -66,10 +64,9 @@ export const getNowPlayingMovies = (
 
 type TopRatedMoviesAsync = Promise<PagedMovieList>;
 export const getTopRatedMovies = (page: number = 1): TopRatedMoviesAsync => {
-  const params = {
-    page,
-  };
-  return movieDBInstace.get(`/movie/top_rated`, {params}).then(resp => {
+  const params = {page};
+
+  return movieDBInstace.get('/movie/top_rated', {params}).then(resp => {
     if (resp.status !== STATUS_CODES.ok) {
       throw new Error('TODO');
     }
@@ -79,10 +76,9 @@ export const getTopRatedMovies = (page: number = 1): TopRatedMoviesAsync => {
 
 type TrendingMoviesAsync = Promise<PagedMovieList>;
 export const getTrendingMovies = (page: number = 1): TrendingMoviesAsync => {
-  const params = {
-    page,
-  };
-  return movieDBInstace.get(`/movie/popular`, {params}).then(resp => {
+  const params = {page};
+
+  return movieDBInstace.get('/movie/popular', {params}).then(resp => {
     if (resp.status !== STATUS_CODES.ok) {
       throw new Error('TODO');
     }
@@ -92,10 +88,9 @@ export const getTrendingMovies = (page: number = 1): TrendingMoviesAsync => {
 
 type UpcomingMoviesAsync = Promise<PagedMovieList>;
 export const getUpcomingMovies = (page: number = 1): UpcomingMoviesAsync => {
-  const params = {
-    page,
-  };
-  return movieDBInstace.get(`/movie/upcoming`, {params}).then(resp => {
+  const params = {page};
+
+  return movieDBInstace.get('/movie/upcoming', {params}).then(resp => {
     if (resp.status !== STATUS_CODES.ok) {
       throw new Error('TODO');
     }
@@ -108,11 +103,9 @@ export const getUpcomingMovies = (page: number = 1): UpcomingMoviesAsync => {
  */
 type SearchAsync = Promise<PagedMovieList>;
 export const getSearch = (query: string, page: number = 1): SearchAsync => {
-  const params = {
-    query,
-    page,
-  };
-  return movieDBInstace.get(`/search/movie`, {params}).then(resp => {
+  const params = {query, page};
+
+  return movieDBInstace.get('/search/movie', {params}).then(resp => {
     if (resp.status !== STATUS_CODES.ok) {
       throw new Error('TODO');
     }
@@ -122,15 +115,14 @@ export const getSearch = (query: string, page: number = 1): SearchAsync => {
 /*
  * Discover
  */
-// type GetSimilarMovieAsync = Promise<SimilarMovieList>;
-// export const get = (id: string, page: number = 1): GetSimilarMovieAsync => {
-//   const params = {
-//     page,
-//   };
-//   return movieDBInstace.get(`/movie/${id}/similar`, {params}).then(resp => {
-//     if (resp.status !== STATUS_CODES.ok) {
-//       throw new Error('TODO');
-//     }
-//     return resp.data as GetSimilarMovieAsync;
-//   });
-// };
+type GetDiscoverMoviesAsync = Promise<PagedMovieList>;
+export const getDiscoverMovies = (page: number = 1): GetDiscoverMoviesAsync => {
+  const params = {page};
+
+  return movieDBInstace.get('/discover/movie', {params}).then(resp => {
+    if (resp.status !== STATUS_CODES.ok) {
+      throw new Error('TODO');
+    }
+    return resp.data;
+  }) as UpcomingMoviesAsync;
+};

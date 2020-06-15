@@ -9,5 +9,5 @@ interface PagedResults<T> {
 export interface BasePagedResults<T> {
   page: number;
   totalPages: number;
-  results: PagedResults<T>;
+  pages: PagedResults<T>;
 }

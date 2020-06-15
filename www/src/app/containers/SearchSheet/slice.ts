@@ -11,7 +11,7 @@ export const initialState: ContainerState = {
   searchValue: '',
   totalPages: 1,
   page: 1,
-  results: {},
+  pages: {},
 };
 
 const searchSheetSlice = createSlice({
@@ -25,7 +25,7 @@ const searchSheetSlice = createSlice({
     loadSearch(state) {
       state.err = false;
       state.loading = true;
-      state.results = initialState.results;
+      state.pages = initialState.pages;
     },
     loadSearchPage(state, action: PayloadAction<number>) {
       state.err = false;
@@ -34,7 +34,7 @@ const searchSheetSlice = createSlice({
     searchLoaded(state, action: PayloadAction<PagedMovieList>) {
       const { results, page, total_pages } = action.payload;
 
-      state.results[page] = results;
+      state.pages[page] = results;
       state.totalPages = total_pages;
       state.page = page;
       state.loading = false;
@@ -45,7 +45,7 @@ const searchSheetSlice = createSlice({
       state.searchValue = initialState.searchValue;
       state.totalPages = initialState.totalPages;
       state.page = initialState.page;
-      state.results = initialState.results;
+      state.pages = initialState.pages;
     },
     error(state) {
       state.err = true;

@@ -7,14 +7,16 @@ import {
   delay,
   takeLatest,
 } from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { actions } from './slice';
-import { PagedMovieList } from 'commonTypes/movies';
 import { selectSearchInput, selectSearchPage } from './selectors';
+import { PagedMovieList } from 'commonTypes/movies';
+import { ENDPOINT_PRE } from 'commonTypes/api';
 
 const SEARCH_DEBOUNCE_DELAY = 2024;
 
-function* handleSearchInput(action) {
+function* handleSearchInput(action: PayloadAction<string>) {
   yield delay(SEARCH_DEBOUNCE_DELAY);
 
   if (action.payload.length == 0) yield put(actions.clearSearch());
@@ -30,13 +32,17 @@ function* getSearchResults() {
   };
 
   try {
-    const resp: AxiosResponse = yield call(axios.get, '/api/search', {
-      params,
-    });
-    const data: PagedMovieList = resp.data;
+    const resp: AxiosResponse = yield call(
+      axios.get,
+      `${ENDPOINT_PRE.api}${ENDPOINT_PRE.search}`,
+      {
+        params,
+      },
+    );
+    const payload: PagedMovieList = resp.data;
 
-    if (data.results && data.results.length > 0) {
-      yield put(actions.searchLoaded(data));
+    if (payload.results && payload.results.length > 0) {
+      yield put(actions.searchLoaded(payload));
     } else {
       yield put(actions.error());
     }

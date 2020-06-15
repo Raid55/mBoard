@@ -9,3 +9,8 @@ export const selectHomePage = createSelector(
   [selectDomain],
   homePageState => homePageState,
 );
+
+export const selectLists = createSelector(
+  [selectDomain],
+  homePage => homePage.lists || {},
+);

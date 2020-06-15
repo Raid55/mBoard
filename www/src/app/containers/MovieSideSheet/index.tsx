@@ -67,8 +67,7 @@ export function MovieSideSheet(props: Props) {
   const credits = useSelector(selectCredits);
 
   useEffect(() => {
-    if (!loading && (!movie || id !== movie.id))
-      dispatch(actions.loadMovie(id));
+    if (!loading && id !== movie.id) dispatch(actions.loadMovie(id));
   }, [id]);
 
   useEffect(() => {

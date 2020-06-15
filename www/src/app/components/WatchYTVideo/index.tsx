@@ -39,7 +39,8 @@ export function WatchYTVideo(props: Props) {
         marginX="auto"
         marginY="1%"
         width="100%"
-        iconBefore="play"
+        iconBefore="video"
+        intent="danger"
         onClick={() => setClosed(false)}
         disable={video ? false : true}
       >

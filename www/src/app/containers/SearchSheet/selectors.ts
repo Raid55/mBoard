@@ -26,5 +26,5 @@ export const selectLoading = createSelector(
 
 export const selectSearchPageResults = createSelector(
   [selectDomain, selectSearchPage],
-  (searchSheetState, searchPage) => searchSheetState.results[searchPage],
+  (searchSheetState, searchPage) => searchSheetState.pages[searchPage] || [],
 );

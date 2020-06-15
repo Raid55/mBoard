@@ -3,7 +3,7 @@
  * ExpandablePosterList
  *
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 
 import { Pane, Heading, ChevronRightIcon } from 'evergreen-ui';
@@ -15,27 +15,41 @@ import { MovieDetails } from 'commonTypes/movies';
 
 interface Props extends BaseProps {
   posters: MovieDetails[];
-  tabName?: string;
+  name?: string;
   tabColor?: string;
   overflow?: boolean;
+  onLoad?: (any) => any;
+  children?: React.ReactNode;
 }
 
 export function ExpandablePosterList(props: Props) {
-  const { tabColor, tabName, posters, overflow, loading } = props;
+  const {
+    tabColor,
+    name,
+    posters,
+    overflow,
+    loading,
+    children,
+    onLoad,
+  } = props;
   const defaultColor = '#DDEBF7';
+
+  useEffect(() => {
+    if (onLoad) onLoad(name);
+  }, []);
 
   return (
     <ListContainer>
-      {tabName && (
+      {name && (
         <ListHeader>
           <ListTab color={tabColor || defaultColor}>
-            <TabText>{tabName}</TabText>
+            <TabText>{name}</TabText>
             <ChevronRightIcon marginY="auto" size={25} />
           </ListTab>
-          <Paginator />
+          {children}
         </ListHeader>
       )}
-      <PosterList posters={posters} loading={loading} overflow={overflow} />
+      <PosterList posters={posters} overflow={overflow} loading={loading} />
     </ListContainer>
   );
 }

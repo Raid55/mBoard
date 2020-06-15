@@ -7,16 +7,7 @@ import React from 'react';
 // import styled from 'styled-components/macro';
 // import { useTranslation } from 'react-i18next';
 
-import {
-  SideSheet,
-  // Card,
-  // Heading,
-  Pane,
-  // Paragraph,
-  // majorScale,
-  // Tablist,
-  // Tab,
-} from 'evergreen-ui';
+import { SideSheet } from 'evergreen-ui';
 
 import { Header as SheetHeader } from './Header';
 import { TabBar as SheetTabBar } from './TabBar';

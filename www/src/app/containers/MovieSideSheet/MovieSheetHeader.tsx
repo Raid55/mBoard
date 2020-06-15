@@ -40,16 +40,17 @@ export function MovieSheetHeader(props: Props) {
     <SheetHeader>
       {loading ? (
         <PosterDiv>
-          <HeaderLoading />
+          <Spinner
+            alignSelf="center"
+            marginY="60%"
+            marginX="auto"
+            height={64}
+          />
         </PosterDiv>
       ) : (
         <>
           <PosterDiv>
-            <PosterImg
-              posterPath={poster_path}
-              name={title}
-              loading={loading}
-            />
+            <PosterImg posterPath={poster_path} name={title} />
             {ytVideo && <WatchYTVideo video={ytVideo} />}
           </PosterDiv>
           <HeaderMetaDiv>
@@ -200,12 +201,6 @@ const CertBadge = (props: { cert?: US_MOVIE_CERTS }) => {
         {props.cert || US_MOVIE_CERTS.nr}
       </Badge>
     </MetaBadgesPane>
-  );
-};
-
-const HeaderLoading = () => {
-  return (
-    <Spinner alignSelf="center" marginY="60%" marginX="auto" height={64} />
   );
 };
 
