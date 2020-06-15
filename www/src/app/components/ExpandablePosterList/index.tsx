@@ -3,10 +3,10 @@
  * ExpandablePosterList
  *
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 
-import { Pane, Heading, ChevronRightIcon } from 'evergreen-ui';
+import { Pane, Heading, Icon } from 'evergreen-ui';
 import { Paginator } from '../Paginator';
 
 import { PosterList } from '../PosterList';
@@ -23,33 +23,33 @@ interface Props extends BaseProps {
 }
 
 export function ExpandablePosterList(props: Props) {
-  const {
-    tabColor,
-    name,
-    posters,
-    overflow,
-    loading,
-    children,
-    onLoad,
-  } = props;
-  const defaultColor = '#DDEBF7';
+  const { tabColor, name, posters, loading, children, onLoad } = props;
+  const [expanded, expand] = useState(false);
 
+  const defaultColor = '#DDEBF7';
   useEffect(() => {
     if (onLoad) onLoad(name);
-  }, []);
+  }, [name, onLoad]);
 
   return (
     <ListContainer>
       {name && (
         <ListHeader>
-          <ListTab color={tabColor || defaultColor}>
+          <ListTab
+            color={tabColor || defaultColor}
+            onClick={() => expand(!expanded)}
+          >
             <TabText>{name}</TabText>
-            <ChevronRightIcon marginY="auto" size={25} />
+            <Icon
+              icon={!expanded ? 'chevron-right' : 'chevron-down'}
+              marginY="auto"
+              size={25}
+            />
           </ListTab>
           {children}
         </ListHeader>
       )}
-      <PosterList posters={posters} overflow={overflow} loading={loading} />
+      <PosterList posters={posters} overflow={!expanded} loading={loading} />
     </ListContainer>
   );
 }
