@@ -46,3 +46,5 @@ To build the app follow the steps:
 - `cd ./server` and `npm start`
 
 By default the app runs on port `8080`, can be changed by exporting `PORT` env var
+
+Note: I had to wrap up this project in a hurry, I do intend to work on it a bit more when I have some time and there are a lot of things I wanted to add, these last weeks have been crazy...
