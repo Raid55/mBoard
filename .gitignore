@@ -115,3 +115,7 @@ server/build/*
 # env vars
 *.env
 .env.*
+
+# build common types
+commonTypes/*.d.ts
+commonTypes/*.js
