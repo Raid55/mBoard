@@ -59,34 +59,32 @@ export function HomePage(props: Props) {
 
   return (
     <>
-      <Helmet>
-        <title>home</title>
-        <meta name="description" content="mBoard homepage" />
-      </Helmet>
       <SearchBox onAnyAction={openSearch} value={searchValue} />
       {/* done very quickly */}
       {Object.values(DISCOVER_FILTERS).map(filter => (
-        <ExpandablePosterList
-          key={filter}
-          posters={
-            (lists[filter] && lists[filter]!.pages[lists[filter]!.page]) || []
-          }
-          name={filter}
-          onLoad={loadFilteredList}
-          tabColor="#FBE6A2"
-          overflow
-          loading={
-            lists[filter] && lists[filter]!.pages[lists[filter]!.page]
-              ? false
-              : true
-          }
-        >
-          <Paginator
-            page={lists[filter] && lists[filter]?.page}
-            handlePageClick={page => loadFilteredList(filter, page)}
-            totalPages={lists[filter] && lists[filter]?.totalPages}
-          />
-        </ExpandablePosterList>
+        <MarginDiv>
+          <ExpandablePosterList
+            key={filter}
+            posters={
+              (lists[filter] && lists[filter]!.pages[lists[filter]!.page]) || []
+            }
+            name={filter}
+            onLoad={loadFilteredList}
+            tabColor="#FBE6A2"
+            overflow
+            loading={
+              lists[filter] && lists[filter]!.pages[lists[filter]!.page]
+                ? false
+                : true
+            }
+          >
+            <Paginator
+              page={lists[filter] && lists[filter]?.page}
+              handlePageClick={page => loadFilteredList(filter, page)}
+              totalPages={lists[filter] && lists[filter]?.totalPages}
+            />
+          </ExpandablePosterList>
+        </MarginDiv>
       ))}
 
       <Switch>
@@ -98,6 +96,6 @@ export function HomePage(props: Props) {
   );
 }
 
-const SearchLink = styled(Link)`
-  text-decoration: none;
+const MarginDiv = styled.div`
+  margin: 2rem 9rem;
 `;

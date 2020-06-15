@@ -27,7 +27,7 @@ import { searchSheetSaga } from './saga';
 
 import { SideSheet, Position } from 'evergreen-ui';
 import { SearchBox } from './searchBox';
-import { ExpandablePosterList } from '../../components/ExpandablePosterList';
+import { PosterList } from '../../components/PosterList';
 interface Props {}
 
 export function SearchSheet(props: Props) {
@@ -54,13 +54,16 @@ export function SearchSheet(props: Props) {
 
   const closeSearchSheet = useCallback(() => {
     history.push('/');
-  }, []);
+  }, [history]);
 
-  const onSearchInput = useCallback((e: SyntheticEvent) => {
-    dispatch(
-      actions.searchInputUpdated((e.target as HTMLTextAreaElement).value),
-    );
-  }, []);
+  const onSearchInput = useCallback(
+    (e: SyntheticEvent) => {
+      dispatch(
+        actions.searchInputUpdated((e.target as HTMLTextAreaElement).value),
+      );
+    },
+    [dispatch],
+  );
 
   return (
     <SideSheet
@@ -69,7 +72,7 @@ export function SearchSheet(props: Props) {
       onCloseComplete={closeSearchSheet}
     >
       <SearchBox ref={anchorTab} value={searchValue} onInput={onSearchInput} />
-      <ExpandablePosterList posters={pageResults} overflow loading={loading} />
+      <PosterList posters={pageResults} overflow loading={loading} />
     </SideSheet>
   );
 }
