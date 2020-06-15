@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 
@@ -15,6 +15,17 @@ interface Props {
 export function CastSheet(props: Props) {
   const { cast, loading } = props;
 
+  const [searchFilter, updateSearchFilter] = useState('');
+  const [filteredCast, updateFilteredCast] = useState([] as CreditsCast[]);
+
+  useEffect(() => {
+    updateFilteredCast(
+      cast.filter(entry =>
+        entry.name.toLowerCase().includes(searchFilter.toLowerCase()),
+      ) as [],
+    );
+  }, [cast, searchFilter]);
+
   return (
     <Pane flex="1" background="tint1" padding={16}>
       {loading ? (
@@ -22,13 +33,13 @@ export function CastSheet(props: Props) {
       ) : (
         <Table border>
           <Table.Head>
-            <Table.SearchHeaderCell />
+            <Table.SearchHeaderCell onChange={updateSearchFilter} />
             <Table.TextHeaderCell>Character</Table.TextHeaderCell>
           </Table.Head>
           <Table.Body height={313}>
-            {cast.length > 0 ? (
-              cast.map(entry => (
-                <Table.Row>
+            {filteredCast.length > 0 ? (
+              filteredCast.map(entry => (
+                <Table.Row key={entry.cast_id}>
                   <Table.Cell display="flex" alignItems="center">
                     <Avatar
                       src={`${api}${posters}${entry.profile_path}`}
@@ -64,5 +75,3 @@ const NoRows = () => {
     </Table.Row>
   );
 };
-
-const Wrapper = styled(Pane)``;

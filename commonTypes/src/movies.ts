@@ -59,10 +59,12 @@ interface SpokenLanguage {
 export interface CreditsCast extends PeopleDetails {
   character: string;
   order: number;
+  cast_id: number;
 }
 export interface CreditsCrew extends PeopleDetails {
   department: string;
   job: CREW_HIGHLIGHT | string;
+  credit_id: string;
 }
 
 export interface MovieCredits {

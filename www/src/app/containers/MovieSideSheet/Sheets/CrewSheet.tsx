@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 
 import { Pane, Table, Avatar, Text, Spinner } from 'evergreen-ui';
-import { FullMovieDetails, CreditsCrew } from 'commontypes/movies';
+import { CreditsCrew } from 'commontypes/movies';
 import { ENDPOINT_PRE } from 'commontypes/api';
 const { api, posters } = ENDPOINT_PRE;
 
@@ -15,6 +15,17 @@ interface Props {
 export function CrewSheet(props: Props) {
   const { crew, loading } = props;
 
+  const [searchFilter, updateSearchFilter] = useState('');
+  const [filteredCrew, updateFilteredCrew] = useState([] as CreditsCrew[]);
+
+  useEffect(() => {
+    updateFilteredCrew(
+      crew.filter(entry =>
+        entry.name.toLowerCase().includes(searchFilter.toLowerCase()),
+      ) as [],
+    );
+  }, [crew, searchFilter]);
+
   return (
     <Pane flex="1" background="tint1" padding={16}>
       {loading ? (
@@ -22,14 +33,14 @@ export function CrewSheet(props: Props) {
       ) : (
         <Table border>
           <Table.Head>
-            <Table.SearchHeaderCell />
+            <Table.SearchHeaderCell onChange={updateSearchFilter} />
             <Table.TextHeaderCell>Job</Table.TextHeaderCell>
             <Table.TextHeaderCell>Department</Table.TextHeaderCell>
           </Table.Head>
           <Table.Body height={313}>
-            {crew.length > 0 ? (
-              crew.map(entry => (
-                <Table.Row>
+            {filteredCrew.length > 0 ? (
+              filteredCrew.map(entry => (
+                <Table.Row key={entry.credit_id}>
                   <Table.Cell display="flex" alignItems="center">
                     <Avatar
                       src={`${api}${posters}${entry.profile_path}`}
@@ -66,5 +77,3 @@ const NoRows = () => {
     </Table.Row>
   );
 };
-
-const Wrapper = styled(Pane)``;
