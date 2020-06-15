@@ -1,6 +1,6 @@
 # mBoard
 
-Movie Board - a simple react app written in typescript.
+Movie Board - a simple react app written in typescript. This project was completed as part of a take home.
 
 This is super crude and done quickly, not everything is "best practice" but I tried my best. Some features are not finished the following should be:
 
