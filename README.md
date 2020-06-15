@@ -30,7 +30,7 @@ To build the app follow the steps:
 - `cd ./server`
 - `vim .env` or export env var
   - add access token as env var `MOVIEDB_ACCESS_TOKEN`
-  - _MUST_ be `API Read Access Token (v4 auth)` Token NOT `API Key (v3 auth)`
+  - _MUST_ be `API Read Access Token (v4 auth)` NOT `API Key (v3 auth)`
 - `npm i`
 - `npm run build`
 - `cd ../`
