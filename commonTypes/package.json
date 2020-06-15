@@ -1,10 +1,9 @@
 {
   "name": "commontypes",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "",
   "files": [
-    "./types/*",
-    "./types/**/*"
+    "."
   ],
   "scripts": {
     "build": "tsc"
