@@ -37,6 +37,8 @@ To build the app follow the steps:
 
 3. Build web app
 
+_Make sure you have built the server beforehand so that www can export into the servers build folder_
+
 - `npm i`
 - `npm run build`
 - `cd ..`

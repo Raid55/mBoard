@@ -108,6 +108,7 @@ dist
 
 # build dir
 server/build/*
+www/build/*
 
 # vscode metadata
 .vscode
